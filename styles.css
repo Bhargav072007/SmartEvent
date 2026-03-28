@@ -1,0 +1,1822 @@
+:root {
+  --navy-950: #081324;
+  --navy-900: #0d1f38;
+  --navy-800: #143158;
+  --navy-700: #1c4a82;
+  --ice-50: #f6fbff;
+  --ice-100: #e5f1ff;
+  --ice-200: #cce2ff;
+  --ice-300: #9fc5f8;
+  --teal-400: #4ac8b3;
+  --teal-500: #29aa97;
+  --gold-400: #f4c861;
+  --gold-500: #dbab3d;
+  --coral-400: #ff8e77;
+  --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.28);
+  --shadow-soft: 0 18px 42px rgba(8, 19, 36, 0.18);
+  --surface: rgba(8, 19, 36, 0.78);
+  --surface-border: rgba(255, 255, 255, 0.14);
+  --text-main: #f4f8ff;
+  --text-soft: #bfd0e7;
+  --text-muted: #8fa6c3;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Aptos", "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at top left, rgba(74, 200, 179, 0.16), transparent 32%),
+    radial-gradient(circle at top right, rgba(244, 200, 97, 0.12), transparent 26%),
+    linear-gradient(160deg, #050c19 0%, #0b1930 45%, #07111f 100%);
+  overflow-x: hidden;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.ambient {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(14px);
+  opacity: 0.58;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient--one {
+  width: 22rem;
+  height: 22rem;
+  top: 8%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(74, 200, 179, 0.22), transparent 68%);
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.ambient--two {
+  width: 28rem;
+  height: 28rem;
+  right: -12%;
+  bottom: 10%;
+  background: radial-gradient(circle, rgba(244, 200, 97, 0.18), transparent 72%);
+  animation: drift 24s ease-in-out infinite alternate-reverse;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.masthead {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.masthead h1,
+.view h2,
+.view h3,
+.card-header h3 {
+  font-family: "Aptos Display", "Trebuchet MS", "Segoe UI", sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.masthead h1 {
+  margin: 0.15rem 0 0;
+  max-width: 18ch;
+  font-size: clamp(2.1rem, 3vw, 3.4rem);
+  line-height: 0.95;
+}
+
+.eyebrow,
+.mini-label {
+  margin: 0;
+  color: var(--ice-300);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.76rem;
+}
+
+.progress-tracker {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--surface-border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text-muted);
+}
+
+.progress-step span {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  transition: transform 220ms ease, background 220ms ease, border-color 220ms ease;
+}
+
+.progress-step small {
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.progress-line {
+  width: 2rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.progress-step.is-active,
+.progress-step.is-complete {
+  color: var(--text-main);
+}
+
+.progress-step.is-active span,
+.progress-step.is-complete span {
+  background: linear-gradient(135deg, var(--teal-400), var(--navy-700));
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+.stage {
+  position: relative;
+}
+
+.view {
+  display: none;
+  animation: fadeUp 420ms ease;
+}
+
+.view.is-active {
+  display: block;
+}
+
+.view-grid {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.view-grid--signup {
+  grid-template-columns: 1.3fr 0.95fr;
+}
+
+.view-grid--ticket {
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.story-panel,
+.form-panel,
+.scanner-panel,
+.ticket-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.story-card,
+.snapshot-card,
+.panel-frame,
+.surface-card {
+  position: relative;
+  border: 1px solid var(--surface-border);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    var(--surface);
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
+}
+
+.story-card,
+.snapshot-card,
+.panel-frame {
+  padding: 1.5rem;
+}
+
+.story-card::before,
+.surface-card::before,
+.panel-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(74, 200, 179, 0.08), transparent 32%, rgba(244, 200, 97, 0.08));
+  pointer-events: none;
+}
+
+.story-card h2 {
+  margin: 0.35rem 0 0.85rem;
+  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+  line-height: 1;
+}
+
+.lead {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.65;
+}
+
+.lead.compact {
+  margin-top: 0.4rem;
+  max-width: 72ch;
+}
+
+.feature-ribbon {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.35rem;
+}
+
+.feature-ribbon article {
+  padding: 1rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.feature-ribbon strong,
+.snapshot-list li,
+.summary-band strong,
+.route-metric strong,
+.ticket-meta strong,
+.camera-meta strong,
+.impact-item strong,
+.ops-metric strong {
+  font-weight: 700;
+}
+
+.feature-ribbon p,
+.snapshot-list,
+.field span,
+.ticket-note,
+.subtle-meta,
+.camera-meta,
+.impact-caption,
+.ops-note,
+.scan-status,
+.ticket-ghost p {
+  color: var(--text-soft);
+}
+
+.snapshot-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.9rem;
+}
+
+.dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: var(--teal-400);
+  box-shadow: 0 0 16px rgba(74, 200, 179, 0.65);
+}
+
+.snapshot-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  line-height: 1.8;
+}
+
+.panel-frame {
+  min-height: 100%;
+}
+
+.panel-frame h3,
+.panel-frame h2 {
+  margin: 0.2rem 0 1.1rem;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+}
+
+.stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.field span,
+.file-field span {
+  font-size: 0.92rem;
+}
+
+.field input,
+.field select,
+.file-field input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
+}
+
+.field input:focus,
+.field select:focus,
+.file-field input:focus {
+  border-color: rgba(74, 200, 179, 0.65);
+  background: rgba(255, 255, 255, 0.09);
+  transform: translateY(-1px);
+}
+
+.primary-button,
+.ghost-button,
+.secondary-button,
+.toggle-chip {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.9rem 1.15rem;
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease, color 200ms ease;
+}
+
+.primary-button {
+  color: #05121f;
+  background: linear-gradient(135deg, var(--gold-400), #ffe1a7);
+  box-shadow: 0 14px 26px rgba(219, 171, 61, 0.28);
+}
+
+.primary-button:hover,
+.ghost-button:hover,
+.secondary-button:hover,
+.toggle-chip:hover {
+  transform: translateY(-1px);
+}
+
+.ghost-button {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.secondary-button {
+  color: var(--text-main);
+  background: linear-gradient(135deg, rgba(74, 200, 179, 0.18), rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(74, 200, 179, 0.2);
+}
+
+.panel-frame--scanner {
+  display: grid;
+  gap: 1rem;
+}
+
+.scanner-head,
+.ticket-choice-head,
+.card-header,
+.summary-tile,
+.camera-card,
+.alert-card,
+.impact-item,
+.ops-metric,
+.gate-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.status-pill {
+  align-self: start;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(74, 200, 179, 0.12);
+  border: 1px solid rgba(74, 200, 179, 0.28);
+  color: #baf7eb;
+  font-size: 0.85rem;
+}
+
+.scanner-stage {
+  position: relative;
+  min-height: 22rem;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(7, 17, 31, 0.58)),
+    radial-gradient(circle at top, rgba(74, 200, 179, 0.12), transparent 40%);
+  overflow: hidden;
+}
+
+.scanner-stage::before,
+.scanner-stage::after {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  border-radius: 22px;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+}
+
+.scanner-stage::after {
+  inset: 3.5rem 2.5rem;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.scanner-stage.is-scanning .scanner-line {
+  animation-play-state: running;
+}
+
+.scanner-line {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 26%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+  box-shadow: 0 0 24px rgba(244, 200, 97, 0.6);
+  animation: scan 2.6s linear infinite paused;
+}
+
+.scanner-glow {
+  position: absolute;
+  inset: 18%;
+  border-radius: 22px;
+  background: radial-gradient(circle, rgba(74, 200, 179, 0.12), transparent 65%);
+}
+
+.ticket-ghost {
+  position: absolute;
+  inset: auto 12% 18%;
+  padding: 1.25rem;
+  border-radius: 22px;
+  background: rgba(7, 17, 31, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.ticket-ghost small {
+  color: var(--gold-400);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.ticket-ghost strong {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 1.25rem;
+}
+
+.scanner-actions {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.file-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.ticket-choice-list {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1rem 0 1.15rem;
+}
+
+.ticket-choice-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  text-align: left;
+}
+
+.ticket-choice-item.is-selected {
+  border-color: rgba(74, 200, 179, 0.35);
+  background: linear-gradient(135deg, rgba(74, 200, 179, 0.14), rgba(255, 255, 255, 0.05));
+}
+
+.ticket-choice-item strong {
+  display: block;
+  font-size: 1.02rem;
+}
+
+.ticket-choice-item span {
+  display: block;
+  margin-top: 0.22rem;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+}
+
+.ticket-chip {
+  align-self: center;
+  padding: 0.38rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.recognized-ticket {
+  padding: 1.25rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.recognized-ticket h4 {
+  margin: 0.25rem 0 0.7rem;
+  font-size: 1.3rem;
+}
+
+.ticket-meta {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--text-soft);
+}
+
+.experience-topbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.95fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.control-stack {
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+  padding: 1.25rem;
+  border: 1px solid var(--surface-border);
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.mode-toggle,
+.scenario-strip,
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.toggle-chip {
+  color: var(--text-soft);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.toggle-chip.is-selected,
+.scenario-chip.is-selected {
+  color: var(--navy-950);
+  background: linear-gradient(135deg, var(--teal-400), #b2fff0);
+}
+
+.scenario-chip {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.8rem 1rem;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.summary-band {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.summary-tile {
+  align-items: center;
+  padding: 1rem 1.1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(135deg, rgba(74, 200, 179, 0.1), rgba(255, 255, 255, 0.04)),
+    rgba(7, 17, 31, 0.82);
+  box-shadow: var(--shadow-soft);
+}
+
+.summary-tile strong {
+  display: block;
+  margin-bottom: 0.18rem;
+  font-size: 1.14rem;
+}
+
+.summary-icon {
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 1.05rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.surface-card {
+  padding: 1.25rem;
+}
+
+.route-surface {
+  grid-column: span 5;
+}
+
+.gate-surface {
+  grid-column: span 7;
+}
+
+.map-surface,
+.camera-surface,
+.alerts-surface,
+.metrics-surface {
+  grid-column: span 6;
+}
+
+.ops-surface {
+  grid-column: span 12;
+}
+
+.card-header {
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.card-header h3 {
+  margin: 0.2rem 0 0;
+  font-size: 1.45rem;
+}
+
+.subtle-meta {
+  font-size: 0.88rem;
+  text-align: right;
+}
+
+.route-recommendation {
+  display: grid;
+  gap: 1rem;
+}
+
+.route-highlight {
+  padding: 1.2rem;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(28, 74, 130, 0.42), rgba(74, 200, 179, 0.16));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.route-highlight h4 {
+  margin: 0.3rem 0 0.35rem;
+  font-size: 1.72rem;
+}
+
+.route-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.route-metric {
+  padding: 0.9rem 0.95rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.route-metric strong,
+.impact-item strong,
+.ops-metric strong {
+  display: block;
+  font-size: 1.04rem;
+}
+
+.route-steps {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.route-step {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.8rem;
+  align-items: start;
+}
+
+.route-step span {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.88rem;
+}
+
+.route-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.gate-grid,
+.camera-grid,
+.alert-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.gate-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gate-card,
+.camera-card,
+.alert-card,
+.impact-item,
+.ops-metric {
+  align-items: start;
+  padding: 1rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gate-card.is-recommended {
+  background: linear-gradient(135deg, rgba(74, 200, 179, 0.16), rgba(255, 255, 255, 0.05));
+  border-color: rgba(74, 200, 179, 0.28);
+}
+
+.gate-title,
+.camera-title,
+.alert-title {
+  display: grid;
+  gap: 0.16rem;
+}
+
+.gate-title strong,
+.camera-title strong,
+.alert-title strong {
+  font-size: 1.02rem;
+}
+
+.density-bar,
+.impact-bar {
+  position: relative;
+  width: 100%;
+  height: 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.density-bar span,
+.impact-bar span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+}
+
+.density-bar span {
+  background: linear-gradient(90deg, var(--teal-400), var(--gold-400), var(--coral-400));
+}
+
+.impact-bar span {
+  background: linear-gradient(90deg, var(--teal-400), #d3ffe0);
+}
+
+.gate-stats {
+  display: grid;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.gate-stat-row,
+.camera-meta,
+.impact-caption,
+.ops-note {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.status-label {
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.status-label.clear {
+  color: #baf7eb;
+}
+
+.status-label.steady {
+  color: #ffe8b0;
+}
+
+.status-label.heavy {
+  color: #ffcec4;
+}
+
+.stadium-map {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  grid-template-areas:
+    "north north north"
+    "west field east"
+    "student field club"
+    "south south south";
+  gap: 0.85rem;
+  min-height: 23rem;
+}
+
+.zone-card,
+.field-core {
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.zone-card {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.field-core {
+  grid-area: field;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background:
+    radial-gradient(circle at center, rgba(74, 200, 179, 0.16), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(7, 17, 31, 0.6));
+}
+
+.field-core strong {
+  display: block;
+  font-size: 1.45rem;
+  margin-bottom: 0.25rem;
+}
+
+.zone-card.north {
+  grid-area: north;
+}
+
+.zone-card.west {
+  grid-area: west;
+}
+
+.zone-card.east {
+  grid-area: east;
+}
+
+.zone-card.student {
+  grid-area: student;
+}
+
+.zone-card.club {
+  grid-area: club;
+}
+
+.zone-card.south {
+  grid-area: south;
+}
+
+.zone-card h4 {
+  margin: 0.15rem 0 0.45rem;
+}
+
+.zone-card p,
+.alert-card p,
+.camera-card p,
+.impact-caption,
+.ops-note {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.zone-card.is-light {
+  background: linear-gradient(135deg, rgba(74, 200, 179, 0.12), rgba(255, 255, 255, 0.04));
+}
+
+.zone-card.is-medium {
+  background: linear-gradient(135deg, rgba(244, 200, 97, 0.14), rgba(255, 255, 255, 0.04));
+}
+
+.zone-card.is-heavy {
+  background: linear-gradient(135deg, rgba(255, 142, 119, 0.18), rgba(255, 255, 255, 0.04));
+}
+
+.camera-visual {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.8rem;
+  border-radius: 18px;
+  margin-top: 0.6rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(8, 19, 36, 0.8)),
+    repeating-linear-gradient(
+      180deg,
+      rgba(74, 200, 179, 0.14) 0,
+      rgba(74, 200, 179, 0.14) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+}
+
+.camera-visual strong {
+  font-size: 1rem;
+}
+
+.camera-confidence {
+  color: #baf7eb;
+  font-size: 0.85rem;
+}
+
+.alert-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.alert-card {
+  flex-direction: column;
+}
+
+.alert-card strong {
+  color: var(--gold-400);
+}
+
+.impact-grid,
+.ops-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.impact-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ops-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.impact-item,
+.ops-metric {
+  flex-direction: column;
+}
+
+.ops-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scan {
+  0% {
+    top: 24%;
+  }
+  50% {
+    top: 72%;
+  }
+  100% {
+    top: 24%;
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(2rem, -1rem, 0) scale(1.06);
+  }
+}
+
+@media (max-width: 1180px) {
+  .masthead,
+  .experience-topbar,
+  .view-grid--signup,
+  .view-grid--ticket {
+    grid-template-columns: 1fr;
+  }
+
+  .masthead {
+    align-items: start;
+  }
+
+  .summary-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .route-surface,
+  .gate-surface,
+  .map-surface,
+  .camera-surface,
+  .alerts-surface,
+  .metrics-surface,
+  .ops-surface {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 860px) {
+  .app-shell {
+    padding-inline: 0.9rem;
+  }
+
+  .progress-tracker {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .progress-step small {
+    display: none;
+  }
+
+  .feature-ribbon,
+  .summary-band,
+  .gate-grid,
+  .alert-list,
+  .impact-grid,
+  .ops-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .route-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stadium-map {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "north"
+      "west"
+      "field"
+      "east"
+      "student"
+      "club"
+      "south";
+  }
+}
+
+@media (max-width: 560px) {
+  .masthead h1 {
+    font-size: 1.9rem;
+  }
+
+  .story-card,
+  .snapshot-card,
+  .panel-frame,
+  .surface-card {
+    border-radius: 24px;
+  }
+
+  .scanner-stage {
+    min-height: 18rem;
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(210, 236, 255, 0.32), transparent 24%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.045) 0,
+      rgba(255, 255, 255, 0.045) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 8%, rgba(224, 241, 255, 0.42), transparent 16%),
+    linear-gradient(180deg, #b7bcc4 0%, #8e97a2 20%, #505968 50%, #1f2631 100%);
+}
+
+.brand-shell,
+.experience-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-mark,
+.experience-brandmark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 18px 30px rgba(12, 23, 39, 0.18);
+  overflow: hidden;
+}
+
+.brand-mark {
+  width: 5.25rem;
+  height: 5.25rem;
+}
+
+.experience-brandmark {
+  width: 4.6rem;
+  height: 4.6rem;
+}
+
+.brand-mark img,
+.experience-brandmark img {
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
+}
+
+.hero-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-token {
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-subtoken {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.masthead {
+  padding: 1.1rem 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(13, 22, 36, 0.64), rgba(13, 22, 36, 0.5));
+  backdrop-filter: blur(20px);
+  box-shadow: 0 24px 40px rgba(13, 22, 36, 0.18);
+}
+
+.story-card,
+.snapshot-card,
+.panel-frame,
+.surface-card,
+.control-stack {
+  background:
+    linear-gradient(180deg, rgba(8, 18, 30, 0.9), rgba(8, 18, 30, 0.78)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 48%);
+  border-color: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(22px);
+}
+
+.story-card,
+.panel-frame,
+.surface-card {
+  border-radius: 30px;
+}
+
+.snapshot-card {
+  display: flex;
+  align-items: center;
+  padding-block: 1.1rem;
+}
+
+.snapshot-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1.25rem;
+  padding-left: 1.1rem;
+  margin: 0;
+}
+
+.feature-ribbon {
+  gap: 0.8rem;
+}
+
+.feature-ribbon article {
+  padding: 1.05rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+}
+
+.feature-ribbon p {
+  margin-bottom: 0;
+}
+
+.experience-topbar {
+  align-items: stretch;
+}
+
+.experience-head {
+  padding: 1.35rem 1.5rem;
+  border-radius: 30px;
+  background: linear-gradient(140deg, rgba(8, 18, 30, 0.88), rgba(20, 49, 88, 0.72));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 42px rgba(11, 20, 34, 0.2);
+}
+
+.control-stack {
+  border-radius: 30px;
+}
+
+.summary-band {
+  gap: 1rem;
+}
+
+.summary-tile {
+  min-height: 5.4rem;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(10, 21, 34, 0.82);
+}
+
+.summary-icon {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dashboard-grid {
+  align-items: start;
+}
+
+.route-surface {
+  grid-column: span 7;
+}
+
+.gate-surface {
+  grid-column: span 5;
+}
+
+.map-surface {
+  grid-column: span 7;
+}
+
+.alerts-surface {
+  grid-column: span 5;
+}
+
+.camera-surface,
+.metrics-surface {
+  grid-column: span 6;
+}
+
+.route-highlight {
+  background: linear-gradient(140deg, rgba(28, 74, 130, 0.44), rgba(76, 180, 255, 0.14));
+}
+
+.route-detail-grid {
+  gap: 0.9rem;
+}
+
+.route-metric,
+.gate-card,
+.camera-card,
+.alert-card,
+.impact-item,
+.ops-metric,
+.zone-card {
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.gate-grid {
+  grid-template-columns: 1fr;
+}
+
+.gate-card {
+  padding: 1.1rem;
+}
+
+.alert-list {
+  grid-template-columns: 1fr;
+}
+
+.alert-card strong:first-child {
+  min-width: 1.8rem;
+}
+
+.stadium-map {
+  gap: 0.9rem;
+}
+
+.field-core {
+  background:
+    radial-gradient(circle at center, rgba(191, 226, 255, 0.18), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(8, 18, 30, 0.72));
+}
+
+.camera-visual {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(8, 19, 36, 0.8)),
+    repeating-linear-gradient(
+      180deg,
+      rgba(123, 190, 255, 0.16) 0,
+      rgba(123, 190, 255, 0.16) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+}
+
+.progress-tracker {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.progress-step span {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 1180px) {
+  .brand-shell,
+  .experience-head {
+    align-items: flex-start;
+  }
+
+  .route-surface,
+  .gate-surface,
+  .map-surface,
+  .alerts-surface,
+  .camera-surface,
+  .metrics-surface,
+  .ops-surface {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 860px) {
+  .brand-shell,
+  .experience-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .snapshot-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+:root {
+  --psu-navy: #041e42;
+  --psu-navy-soft: #0d315f;
+  --psu-white: #f6f8fc;
+  --psu-silver: #d8e0ea;
+  --psu-ice: #9db2cc;
+  --psu-accent: #6bcf7a;
+  --ticket-orange: #f0a25f;
+}
+
+body {
+  background: linear-gradient(180deg, #eef2f7 0%, #e3eaf2 100%);
+  color: var(--psu-navy);
+}
+
+body::before {
+  opacity: 0.08;
+}
+
+.app-shell {
+  max-width: 580px;
+  padding: 1.1rem 0.85rem 2rem;
+}
+
+.masthead {
+  margin-bottom: 1rem;
+  padding: 1rem 1rem 0.9rem;
+  background: linear-gradient(180deg, rgba(4, 30, 66, 0.96), rgba(8, 39, 84, 0.94));
+  color: var(--psu-white);
+}
+
+.masthead h1 {
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  max-width: 13ch;
+}
+
+.eyebrow,
+.mini-label,
+.masthead .eyebrow {
+  color: #b7c7dc;
+}
+
+.progress-tracker {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-step,
+.progress-step small {
+  color: #bfd0e7;
+}
+
+.progress-step.is-active,
+.progress-step.is-complete {
+  color: #ffffff;
+}
+
+.story-card,
+.snapshot-card,
+.panel-frame,
+.surface-card,
+.control-stack,
+.experience-head {
+  background: linear-gradient(180deg, rgba(4, 30, 66, 0.97), rgba(9, 42, 89, 0.94));
+  color: var(--psu-white);
+}
+
+.lead,
+.feature-ribbon p,
+.ticket-note,
+.subtle-meta,
+.scan-status,
+.snapshot-list,
+.field span,
+.stadium-photo-copy p,
+.ticket-meta {
+  color: #c9d6e6;
+}
+
+.field input,
+.field select,
+.file-field input {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.ticket-app-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.view-grid--signup,
+.view-grid--ticket {
+  grid-template-columns: 1fr;
+}
+
+.stadium-hero-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 34px;
+  background: linear-gradient(180deg, rgba(4, 30, 66, 0.98), rgba(8, 39, 84, 0.96));
+  color: var(--psu-white);
+  box-shadow: 0 20px 40px rgba(4, 30, 66, 0.18);
+}
+
+.app-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.app-badge-mark {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.app-badge-mark img {
+  width: 76%;
+  height: 76%;
+}
+
+.app-badge strong {
+  display: block;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.app-badge span {
+  color: #b7c7dc;
+  font-size: 0.95rem;
+}
+
+.stadium-photo-card {
+  min-height: 12rem;
+  display: flex;
+  align-items: end;
+  padding: 1.25rem;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(4, 30, 66, 0.1), rgba(4, 30, 66, 0.7)),
+    radial-gradient(circle at center, rgba(87, 126, 78, 0.24), transparent 38%),
+    linear-gradient(180deg, #5b7a56 0%, #304f38 50%, #102236 100%);
+  overflow: hidden;
+}
+
+.stadium-photo-copy h3 {
+  margin: 0.2rem 0 0.25rem;
+  font-size: 1.95rem;
+  line-height: 1.02;
+}
+
+.ticket-confirm-card {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  padding: 1.6rem 1.2rem 1.4rem;
+  border-radius: 34px;
+  background: #ffffff;
+  box-shadow: 0 18px 36px rgba(8, 27, 54, 0.08);
+  text-align: center;
+}
+
+.ticket-confirm-card h3 {
+  margin: 0;
+  color: var(--psu-navy);
+  font-size: 2rem;
+}
+
+.ticket-confirm-card p {
+  margin: 0;
+  color: #7589a5;
+  font-size: 1.05rem;
+}
+
+.confirmation-mark {
+  display: grid;
+  place-items: center;
+  width: 4.6rem;
+  height: 4.6rem;
+  border-radius: 999px;
+  border: 4px solid var(--psu-accent);
+  color: var(--psu-accent);
+  font-size: 2.1rem;
+  font-weight: 700;
+}
+
+.view-grid--ticket {
+  grid-template-columns: 1fr;
+}
+
+.panel-frame,
+.story-card,
+.snapshot-card,
+.surface-card {
+  border-radius: 30px;
+  box-shadow: 0 18px 34px rgba(6, 23, 48, 0.16);
+}
+
+.recognized-ticket {
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(4, 30, 66, 0.14), rgba(4, 30, 66, 0.82)),
+    radial-gradient(circle at center, rgba(72, 103, 61, 0.2), transparent 40%);
+  min-height: 17rem;
+  display: grid;
+  align-content: end;
+}
+
+.recognized-ticket .mini-label {
+  color: #b7c7dc;
+}
+
+.recognized-ticket h4 {
+  font-size: 1.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.ticket-meta {
+  grid-template-columns: 1fr;
+}
+
+.ticket-meta strong {
+  color: #ffffff;
+}
+
+.ticket-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  margin-bottom: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.ticket-stats div,
+.ticket-split div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.ticket-stats span,
+.ticket-split span {
+  color: #c1cfdf;
+  font-size: 0.84rem;
+}
+
+.ticket-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.95rem;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ticket-emphasis {
+  color: var(--ticket-orange);
+}
+
+.ticket-chip {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.experience-topbar {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.experience-head,
+.control-stack {
+  border-radius: 30px;
+}
+
+.summary-band {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.summary-tile,
+.route-metric,
+.gate-card,
+.camera-card,
+.alert-card,
+.impact-item,
+.ops-metric,
+.zone-card {
+  border-radius: 24px;
+  color: var(--psu-white);
+}
+
+.summary-tile {
+  background: linear-gradient(180deg, rgba(4, 30, 66, 0.96), rgba(9, 42, 89, 0.92));
+}
+
+.summary-tile span,
+.route-metric span,
+.zone-card p,
+.alert-card p,
+.impact-caption,
+.ops-note {
+  color: #c9d6e6;
+}
+
+.summary-icon {
+  color: #d9e4f0;
+}
+
+.surface-card {
+  background: linear-gradient(180deg, rgba(4, 30, 66, 0.98), rgba(8, 39, 84, 0.96));
+}
+
+.route-highlight,
+.camera-visual,
+.field-core {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+}
+
+.route-highlight h4,
+.card-header h3,
+.field-core strong,
+.impact-item strong,
+.ops-metric strong,
+.summary-tile strong,
+.gate-title strong,
+.camera-title strong {
+  color: #ffffff;
+}
+
+.status-pill {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.status-label.clear {
+  color: #7ee18d;
+}
+
+.status-label.steady {
+  color: #ffd18d;
+}
+
+.status-label.heavy {
+  color: #ffb3a2;
+}
+
+.density-bar span {
+  background: linear-gradient(90deg, #5ecb74, #8ec5ff, var(--ticket-orange));
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #ffffff, #dfe9f7);
+  color: var(--psu-navy);
+}
+
+.secondary-button,
+.ghost-button,
+.toggle-chip,
+.scenario-chip {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.toggle-chip.is-selected,
+.scenario-chip.is-selected {
+  background: #ffffff;
+  color: var(--psu-navy);
+}
+
+.dashboard-grid {
+  grid-template-columns: 1fr;
+}
+
+.route-surface,
+.gate-surface,
+.map-surface,
+.alerts-surface,
+.camera-surface,
+.metrics-surface,
+.ops-surface {
+  grid-column: span 1;
+}
+
+.gate-grid,
+.alert-list,
+.impact-grid,
+.ops-grid {
+  grid-template-columns: 1fr;
+}
+
+.snapshot-list,
+.feature-ribbon {
+  grid-template-columns: 1fr;
+}
