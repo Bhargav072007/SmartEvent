@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartVenue PSU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="side-panel">
+      <div class="brand-lockup">
+        <img src="logo.svg" alt="SmartVenue logo" class="brand-logo">
+        <div>
+          <p class="eyebrow">Penn State Hackathon MVP</p>
+          <h1>SmartVenue PSU</h1>
+        </div>
+      </div>
+
+      <div class="side-hero">
+        <p class="eyebrow">Live Venue Intelligence</p>
+        <h2>Turn crowd pressure into calmer movement.</h2>
+        <p class="side-copy">
+          A Beaver Stadium-inspired fan experience that guides entry, protects ADA routes,
+          and helps operators rebalance gates, concourses, and exits in real time.
+        </p>
+      </div>
+
+      <div class="legend-card">
+        <p class="legend-title">What this MVP covers</p>
+        <div class="legend-list">
+          <span class="pill">Fastest Gate</span>
+          <span class="pill">Queue Density</span>
+          <span class="pill">Camera Zones</span>
+          <span class="pill">ADA Safety</span>
+          <span class="pill">Exit Reroutes</span>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <p class="eyebrow">Tonight's Venue</p>
+        <div class="score-row">
+          <div>
+            <h3>Beaver Stadium</h3>
+            <p>White Out Readiness</p>
+          </div>
+          <strong>106,572</strong>
+        </div>
+      </div>
+    </aside>
+
+    <main class="phone-stage">
+      <section class="phone-frame">
+        <header class="phone-topbar">
+          <div>
+            <p class="eyebrow">SmartVenue Fan App</p>
+            <h2>Arrival Assistant</h2>
+          </div>
+          <div class="status-badge" id="statusBadge">Sign up</div>
+        </header>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <section class="screen is-active" id="signupScreen">
+          <div class="hero-card">
+            <div>
+              <p class="eyebrow">Personalized Routing</p>
+              <h3>Get your game-day flow set up in under a minute.</h3>
+            </div>
+            <p>
+              Start with your fan profile, then scan your ticket to unlock Penn State
+              entry guidance, gate recommendations, and live crowd alerts.
+            </p>
+          </div>
+
+          <form class="stack form-card" id="signupForm">
+            <label>
+              <span>Full Name</span>
+              <input type="text" name="name" placeholder="Nittany Lion fan" required>
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" placeholder="you@example.com" required>
+            </label>
+            <label>
+              <span>Fan Type</span>
+              <select name="fanType">
+                <option>Student</option>
+                <option>General Admission</option>
+                <option>ADA Attendee</option>
+                <option>Visitor</option>
+              </select>
+            </label>
+            <label>
+              <span>Arrival Preference</span>
+              <select name="arrival">
+                <option>Arriving now</option>
+                <option>Within 15 minutes</option>
+                <option>Within 30 minutes</option>
+              </select>
+            </label>
+            <button type="submit" class="primary-btn">Create account</button>
+          </form>
+        </section>
+
+        <section class="screen" id="ticketScreen">
+          <div class="hero-card ticket-hero">
+            <div>
+              <p class="eyebrow">Ticket Recognition</p>
+              <h3>Scan your event ticket to enter the live venue view.</h3>
+            </div>
+            <p>
+              For the MVP, use one of the demo passes below or enter a sample SmartVenue
+              code to simulate scan recognition.
+            </p>
+          </div>
+
+          <div class="ticket-options" id="ticketOptions"></div>
+
+          <div class="manual-scan-card">
+            <label>
+              <span>Manual ticket code</span>
+              <input type="text" id="ticketInput" placeholder="PSU-BVR-WE07-1842">
+            </label>
+            <button type="button" class="primary-btn" id="scanButton">Scan ticket and open event</button>
+          </div>
+        </section>
+
+        <section class="screen" id="eventScreen">
+          <div class="event-head">
+            <div>
+              <p class="eyebrow">Penn State Football</p>
+              <h3 id="eventTitle">Beaver Stadium Live</h3>
+            </div>
+            <button class="ghost-btn" id="resetButton" type="button">Start over</button>
+          </div>
+
+          <article class="stadium-card">
+            <div class="stadium-copy">
+              <p class="eyebrow">Active Event</p>
+              <h3>Penn State vs. Michigan</h3>
+              <p id="ticketSummary">Section WE, Row 7, Seat 18</p>
+            </div>
+            <div class="ticket-chip" id="gateChip">Gate A</div>
+          </article>
+
+          <section class="highlights-grid" id="highlightsGrid"></section>
+
+          <article class="route-card">
+            <div class="route-header">
+              <div>
+                <p class="eyebrow">Recommended Route</p>
+                <h3 id="routeTitle">Head to Gate C</h3>
+              </div>
+              <div class="alert-dot"></div>
+            </div>
+            <p id="routeDescription">
+              Gate A is under heavy student surge. Gate C cuts expected wait by 11 minutes.
+            </p>
+            <div class="route-steps" id="routeSteps"></div>
+          </article>
+
+          <article class="camera-card">
+            <div class="camera-header">
+              <div>
+                <p class="eyebrow">Venue Camera Feed Summary</p>
+                <h3>Live zone density</h3>
+              </div>
+              <span class="live-pill">Live</span>
+            </div>
+            <div class="zone-list" id="zoneList"></div>
+          </article>
+
+          <div class="toggle-row">
+            <button class="mode-btn is-active" id="fanModeButton" type="button">Fan view</button>
+            <button class="mode-btn" id="opsModeButton" type="button">Operator view</button>
+          </div>
+
+          <section class="ops-panel" id="opsPanel" hidden>
+            <article class="ops-card">
+              <div class="ops-header">
+                <div>
+                  <p class="eyebrow">Simulation Snapshot</p>
+                  <h3>Before vs. after intervention</h3>
+                </div>
+                <button class="ghost-btn" id="simulateButton" type="button">Run next scenario</button>
+              </div>
+              <div class="metrics-grid" id="metricsGrid"></div>
+            </article>
+
+            <article class="ops-card">
+              <p class="eyebrow">Interventions</p>
+              <div class="intervention-list" id="interventionList"></div>
+            </article>
+          </section>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

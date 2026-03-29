@@ -1,0 +1,37 @@
+{
+  "venue_id": "beaver_stadium_psu",
+  "venue_name": "Beaver Stadium",
+  "university": "Penn State",
+  "city": "University Park",
+  "state": "Pennsylvania",
+  "official_capacity": 106572,
+  "named_gates": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+  ],
+  "official_public_facts": [
+    "Beaver Stadium is Penn State's football stadium in University Park, Pennsylvania.",
+    "Public capacity anchor used here is 106,572.",
+    "Publicly identified named gates include A, B, C, D, E, and F.",
+    "Gate A is treated as the student entrance.",
+    "Gate B is associated with ADA shuttle drop access.",
+    "Gate E is associated with ticket and will-call activity.",
+    "Beaver Stadium is a very large college football venue with pronounced pre-kickoff crowd surges.",
+    "The project concept is SmartVenue PSU, designed for Beaver Stadium and adaptable beyond it."
+  ],
+  "modeled_assumptions": [
+    "Gate A has the strongest late student-arrival pressure near kickoff.",
+    "Gate B has steadier arrivals with accessibility-related traffic and lower-mobility pacing.",
+    "Gate E has intermittent ticketing friction and slightly slower effective throughput.",
+    "Gates C, D, and F absorb general-public balancing and rerouted demand.",
+    "Premium and rivalry games create stronger late surges and higher crowd pressure.",
+    "Night games sharpen late-arrival behavior relative to noon games.",
+    "Bad weather makes arrivals more bursty and increases screening friction.",
+    "Security slowdowns can create nonlinear queue growth even without total demand spikes."
+  ],
+  "notes": "Public facts are used as anchors; operational rates, arrival curves, and camera behavior are modeled for realistic prototyping."
+}

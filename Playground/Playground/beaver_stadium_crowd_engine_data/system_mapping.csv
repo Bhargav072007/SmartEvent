@@ -1,0 +1,11 @@
+subsystem,primary_method,backup_method,input_source,output_artifact,real_time_or_batch,why_selected
+scene_interpretation,CrowdVLM-R1,rule-based summary layer,fused vision outputs and gate state features,operator-facing crowd summary,real-time,Needed to turn dense technical signals into Beaver Stadium-specific explanations.
+detection,YOLOv8,FFNet lightweight count head,live gate camera frames,person bounding boxes and first-pass count,real-time,Strong baseline for moderate-density gate scenes and live observability.
+density_estimation,HMSTUNet,CrowdVLM-R1 crowd-state prior,camera frame and optional enhanced frame,density heatmap and estimated total count,real-time,Dense pre-kickoff scenes require heatmaps beyond simple boxes.
+point_localization,PET,YOLOv8 box centers,dense gate camera frames,point locations and dense queue clusters,batch,Dense occlusion makes point-based localization more stable than box-only logic.
+image_enhancement,Real-ESRGAN,raw feed passthrough,low-quality or compressed frames,enhanced frame,batch,"Selective enhancement is useful for night, rain, and compressed camera conditions."
+detection_validation,B2BDet,manual detector A/B evaluation,baseline and enhanced detector outputs,enhancement quality validation metrics,batch,Needed to prove enhancement helps rather than hurts operational detection quality.
+motion_estimation,Farneback Optical Flow,frame differencing,consecutive gate or concourse frames,motion magnitude and dominant flow state,real-time,"Captures inbound surges, stalls, and mixed movement efficiently."
+safety_scoring,Fruin Level of Service,queue-plus-density threshold rules,"density, queue, and motion features",pressure score and density level,real-time,Provides interpretable operational risk labels for Beaver Stadium entry conditions.
+congestion_forecasting,Proactive Crowd Flow,historical gate curve extrapolation,"arrivals history, live gate state, match context",short-horizon congestion forecast,batch,"The engine needs proactive rerouting, not just reactive monitoring."
+gate_routing,GABPPO,rule-based rerouting policy,"forecast demand, pressure scores, gate capacities",recommended action and alternate gate,real-time,Optimizes gate balancing under the very uneven arrival behavior seen at Beaver Stadium.

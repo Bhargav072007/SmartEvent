@@ -1,0 +1,10 @@
+subsystem,primary_method,backup_method,input_source,output_artifact,real_time_or_batch,why_selected
+counting,FFNet,CrowdVLM-R1,live gate and concourse camera frames,per-frame crowd counts,real-time,"FFNet is optimized for deployment latency, while CrowdVLM-R1 provides a stronger benchmark and fallback reference."
+density estimation,HMSTUNet,FFNet lightweight density head,camera frames with calibrated ROI masks,density heatmaps and hotspot overlays,real-time,Spatial density is needed for bottleneck and pressure reasoning beyond scalar counts.
+localization,PET,YOLOv8 person centers,annotated stadium frames,point-level person coordinates,batch,Point localization is annotation-efficient and more stable than boxes in dense crowds.
+detection,YOLOv8,B2BDet validation stack,live or recorded camera frames,person bounding boxes with confidence,real-time,YOLOv8 is practical for live observability in lower-density camera views.
+image enhancement,Real-ESRGAN,raw feed passthrough,pixelated or low-resolution frames,enhanced image crops,batch,"Selective super-resolution can recover details before detection, but should not be always-on."
+motion estimation,Farneback Optical Flow,frame differencing baseline,consecutive gate or corridor frames,flow vectors and dominant direction,real-time,A dependable classical baseline is useful when labels are scarce and direction is the main requirement.
+safety scoring,Fruin Level of Service,threshold rules on density and wait time,"density estimates, flow estimates, and geometry assumptions",pressure score and LOS class,real-time,It provides an interpretable bridge from perception outputs to operator decisions.
+gate optimization,GABPPO,rule-based rerouting policy,"gate state graph, pressure scores, and forecasts",route recommendations by gate and time,real-time,Optimization is needed once gate conditions and safety states are available.
+forecasting,Proactive Crowd Flow,historical arrival curve baseline,"historical gate arrivals, live counts, and event context",arrival forecasts and ACI gap alerts,batch,"Forecasting enables proactive, not just reactive, crowd operations."

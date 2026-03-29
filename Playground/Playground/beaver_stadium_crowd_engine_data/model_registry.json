@@ -1,0 +1,457 @@
+[
+  {
+    "paper_id": "crowdvlm_r1_2025",
+    "name": "CrowdVLM-R1",
+    "year": 2025,
+    "category": "scene interpretation",
+    "role_in_system": "Top-level crowd interpretation layer that converts visual and temporal signals into human-readable Beaver Stadium summaries.",
+    "upstream_dependencies": [
+      "YOLOv8",
+      "HMSTUNet",
+      "PET",
+      "Farneback Optical Flow"
+    ],
+    "downstream_dependencies": [
+      "operator dashboard",
+      "alerting layer"
+    ],
+    "expected_inputs": [
+      "image features",
+      "density estimates",
+      "detection counts",
+      "movement signals"
+    ],
+    "expected_outputs": [
+      "scene-level interpretation",
+      "qualitative crowd labels",
+      "operator-facing textual summary"
+    ],
+    "evaluation_metrics": [
+      "label accuracy",
+      "operator usefulness score",
+      "explanation consistency"
+    ],
+    "strengths": [
+      "context fusion",
+      "operator-readable reasoning"
+    ],
+    "failure_modes": [
+      "misleading summaries if upstream counts are wrong",
+      "generic phrasing under unseen conditions"
+    ],
+    "deployment_constraints": [
+      "not the lowest-latency model",
+      "best used on top of reliable perception"
+    ],
+    "notes": "Useful for explanations such as Gate A overload from late student arrival or Gate E friction from ticket handling."
+  },
+  {
+    "paper_id": "hmstunet_2026",
+    "name": "HMSTUNet",
+    "year": 2026,
+    "category": "density estimation",
+    "role_in_system": "Primary dense-scene density layer for gate and concourse crowd estimation.",
+    "upstream_dependencies": [
+      "camera frames",
+      "optional enhanced frames"
+    ],
+    "downstream_dependencies": [
+      "Fruin LOS",
+      "CrowdVLM-R1",
+      "forecasting features"
+    ],
+    "expected_inputs": [
+      "camera frame",
+      "enhanced frame when needed"
+    ],
+    "expected_outputs": [
+      "density heatmap",
+      "estimated people count",
+      "hotspot intensity"
+    ],
+    "evaluation_metrics": [
+      "MAE",
+      "RMSE",
+      "heatmap alignment"
+    ],
+    "strengths": [
+      "good in dense scenes",
+      "spatial hotspot visibility"
+    ],
+    "failure_modes": [
+      "reduced fidelity under severe weather glare",
+      "needs calibration for geometry"
+    ],
+    "deployment_constraints": [
+      "moderate compute",
+      "best with consistent camera placement"
+    ],
+    "notes": "Most valuable in high-pressure Gate A and premium-game scenes."
+  },
+  {
+    "paper_id": "pet_iccv_2023",
+    "name": "PET",
+    "year": 2023,
+    "category": "point localization",
+    "role_in_system": "Point-level localization layer for dense and occluded gate scenes.",
+    "upstream_dependencies": [
+      "camera frames"
+    ],
+    "downstream_dependencies": [
+      "queue measurement",
+      "dense-scene validation"
+    ],
+    "expected_inputs": [
+      "camera frame"
+    ],
+    "expected_outputs": [
+      "point locations",
+      "point counts",
+      "local cluster intensity"
+    ],
+    "evaluation_metrics": [
+      "point precision",
+      "point recall",
+      "localization error"
+    ],
+    "strengths": [
+      "better than boxes in dense scenes",
+      "annotation-efficient"
+    ],
+    "failure_modes": [
+      "head merges in tightly packed crowds",
+      "camera angle sensitivity"
+    ],
+    "deployment_constraints": [
+      "requires point-based supervision"
+    ],
+    "notes": "Supports packed entry-line measurement where boxes overlap."
+  },
+  {
+    "paper_id": "ffnet_2024",
+    "name": "FFNet",
+    "year": 2024,
+    "category": "real-time deployment",
+    "role_in_system": "Low-latency edge inference backbone for live gate updates.",
+    "upstream_dependencies": [
+      "camera frames",
+      "gate metadata"
+    ],
+    "downstream_dependencies": [
+      "dashboard",
+      "forecast refresh"
+    ],
+    "expected_inputs": [
+      "camera frame",
+      "camera metadata"
+    ],
+    "expected_outputs": [
+      "fast crowd estimates",
+      "state signals"
+    ],
+    "evaluation_metrics": [
+      "fps",
+      "latency_ms",
+      "MAE"
+    ],
+    "strengths": [
+      "fast",
+      "deployment-friendly"
+    ],
+    "failure_modes": [
+      "reduced detail in very dense scenes",
+      "weather sensitivity"
+    ],
+    "deployment_constraints": [
+      "edge-friendly hardware still preferred"
+    ],
+    "notes": "Core real-time model for MVP deployment."
+  },
+  {
+    "paper_id": "proactive_crowd_flow_2025",
+    "name": "Proactive Crowd Flow",
+    "year": 2025,
+    "category": "forecasting",
+    "role_in_system": "Forecast near-future gate congestion and intervention windows.",
+    "upstream_dependencies": [
+      "gate arrivals",
+      "live counts",
+      "match metadata"
+    ],
+    "downstream_dependencies": [
+      "GABPPO",
+      "staffing recommendations"
+    ],
+    "expected_inputs": [
+      "time-series arrivals",
+      "weather context",
+      "kickoff context"
+    ],
+    "expected_outputs": [
+      "short-horizon congestion forecasts",
+      "overload warnings",
+      "action suggestions"
+    ],
+    "evaluation_metrics": [
+      "RMSE",
+      "MAPE",
+      "lead-time gain"
+    ],
+    "strengths": [
+      "proactive operations support",
+      "context-aware forecasting"
+    ],
+    "failure_modes": [
+      "sudden disruptions break forecasts",
+      "overreliance on historical priors"
+    ],
+    "deployment_constraints": [
+      "needs ongoing time-series storage"
+    ],
+    "notes": "Critical for detecting when Gate A or E will fail before queues fully form."
+  },
+  {
+    "paper_id": "yolov8_2023",
+    "name": "YOLOv8",
+    "year": 2023,
+    "category": "detection",
+    "role_in_system": "Live bounding-box detector for lower-density and moderate-density gate scenes.",
+    "upstream_dependencies": [
+      "camera frames"
+    ],
+    "downstream_dependencies": [
+      "CrowdVLM-R1",
+      "validation layer"
+    ],
+    "expected_inputs": [
+      "camera frame"
+    ],
+    "expected_outputs": [
+      "bounding boxes",
+      "person count",
+      "confidence scores"
+    ],
+    "evaluation_metrics": [
+      "mAP",
+      "precision",
+      "recall",
+      "fps"
+    ],
+    "strengths": [
+      "real-time",
+      "mature operational tooling"
+    ],
+    "failure_modes": [
+      "undercounting in dense occlusion",
+      "false positives from signage or flags"
+    ],
+    "deployment_constraints": [
+      "resolution must support person scale"
+    ],
+    "notes": "Best for general balancing gates before scenes become too packed."
+  },
+  {
+    "paper_id": "real_esrgan_2021",
+    "name": "Real-ESRGAN",
+    "year": 2021,
+    "category": "image enhancement",
+    "role_in_system": "Selective enhancement of low-quality gate footage before downstream inference.",
+    "upstream_dependencies": [
+      "raw frames"
+    ],
+    "downstream_dependencies": [
+      "YOLOv8",
+      "PET",
+      "HMSTUNet"
+    ],
+    "expected_inputs": [
+      "low-quality frame"
+    ],
+    "expected_outputs": [
+      "enhanced frame",
+      "quality improvement indicator"
+    ],
+    "evaluation_metrics": [
+      "SSIM",
+      "PSNR",
+      "downstream detection delta"
+    ],
+    "strengths": [
+      "improves low-quality imagery",
+      "helps night or compressed feeds"
+    ],
+    "failure_modes": [
+      "artifact hallucination",
+      "latency overhead"
+    ],
+    "deployment_constraints": [
+      "best used selectively, not always-on"
+    ],
+    "notes": "Especially relevant for rainy or night-game footage."
+  },
+  {
+    "paper_id": "b2bdet_2024",
+    "name": "B2BDet",
+    "year": 2024,
+    "category": "detection validation",
+    "role_in_system": "Validate whether enhancement materially improves detection quality.",
+    "upstream_dependencies": [
+      "raw frames",
+      "enhanced frames",
+      "detector outputs"
+    ],
+    "downstream_dependencies": [
+      "enhancement policy"
+    ],
+    "expected_inputs": [
+      "baseline detection outputs",
+      "enhanced detection outputs"
+    ],
+    "expected_outputs": [
+      "validation metrics",
+      "comparison features"
+    ],
+    "evaluation_metrics": [
+      "mAP delta",
+      "precision delta",
+      "recall delta"
+    ],
+    "strengths": [
+      "prevents blind trust in enhancement",
+      "gives measurable value check"
+    ],
+    "failure_modes": [
+      "validation set mismatch",
+      "unstable gains across scenes"
+    ],
+    "deployment_constraints": [
+      "evaluation workflow, not direct gate deployment"
+    ],
+    "notes": "Useful for deciding whether Gate E night footage should be enhanced before detection."
+  },
+  {
+    "paper_id": "farneback_2003",
+    "name": "Farneback Optical Flow",
+    "year": 2003,
+    "category": "motion estimation",
+    "role_in_system": "Estimate dominant crowd movement toward gates and detect stalls or turbulence.",
+    "upstream_dependencies": [
+      "consecutive frames"
+    ],
+    "downstream_dependencies": [
+      "Fruin LOS",
+      "CrowdVLM-R1"
+    ],
+    "expected_inputs": [
+      "frame_t",
+      "frame_t_plus_1"
+    ],
+    "expected_outputs": [
+      "motion magnitude",
+      "dominant flow direction",
+      "flow stability"
+    ],
+    "evaluation_metrics": [
+      "direction consistency",
+      "runtime_ms",
+      "motion anomaly recall"
+    ],
+    "strengths": [
+      "interpretable",
+      "works without deep labels"
+    ],
+    "failure_modes": [
+      "camera shake",
+      "weather reflections"
+    ],
+    "deployment_constraints": [
+      "camera stabilization helps"
+    ],
+    "notes": "Flow spikes align with pre-kickoff surges and queue compression."
+  },
+  {
+    "paper_id": "fruin_los_1971",
+    "name": "Fruin Level of Service",
+    "year": 1971,
+    "category": "safety scoring",
+    "role_in_system": "Convert density, queue, and movement into interpretable pressure and service levels.",
+    "upstream_dependencies": [
+      "density layer",
+      "queue features",
+      "motion layer"
+    ],
+    "downstream_dependencies": [
+      "GABPPO",
+      "dashboard alerts"
+    ],
+    "expected_inputs": [
+      "density",
+      "queue",
+      "movement"
+    ],
+    "expected_outputs": [
+      "pressure_score",
+      "density_level",
+      "service class"
+    ],
+    "evaluation_metrics": [
+      "alert precision",
+      "operator trust"
+    ],
+    "strengths": [
+      "interpretable",
+      "simple operational semantics"
+    ],
+    "failure_modes": [
+      "sensitive to calibration assumptions",
+      "cannot capture all human behavior"
+    ],
+    "deployment_constraints": [
+      "requires venue-specific threshold tuning"
+    ],
+    "notes": "Safety layer behind low/medium/high/critical state labels."
+  },
+  {
+    "paper_id": "gabppo_2024",
+    "name": "GABPPO",
+    "year": 2024,
+    "category": "gate routing",
+    "role_in_system": "Optimize routing and staffing actions under uneven Beaver Stadium arrivals.",
+    "upstream_dependencies": [
+      "forecasting",
+      "pressure scores",
+      "gate metadata"
+    ],
+    "downstream_dependencies": [
+      "fan app recommendations",
+      "operator actions"
+    ],
+    "expected_inputs": [
+      "gate states",
+      "predicted demand",
+      "pressure features"
+    ],
+    "expected_outputs": [
+      "recommended action",
+      "alternate gate",
+      "expected wait reduction"
+    ],
+    "evaluation_metrics": [
+      "wait reduction",
+      "queue reduction",
+      "constraint violations"
+    ],
+    "strengths": [
+      "action-oriented optimization",
+      "good for balancing uneven gates"
+    ],
+    "failure_modes": [
+      "bad upstream inputs degrade policy quality",
+      "sim-to-real mismatch"
+    ],
+    "deployment_constraints": [
+      "should be guarded by safety and operational rules"
+    ],
+    "notes": "Used to shift demand away from Gate A and friction-heavy Gate E toward C, D, or F."
+  }
+]

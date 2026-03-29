@@ -1,0 +1,7 @@
+gate_id,gate_role,primary_fan_mix,nominal_capacity_per_minute,throughput_risk,accessibility_factor,ticketing_friction_factor,student_bias_score,general_bias_score,ada_bias_score,notes
+A,student entrance,student-heavy with some staff and season ticket spillover,250,high late-surge compression risk,0.2,0.08,0.98,0.34,0.1,Strongest pre-kickoff student clustering and the most frequent surge behavior.
+B,ADA shuttle and accessibility access,accessibility-heavy with steadier companion and staff flow,115,moderate screening sensitivity but steadier arrivals,1.0,0.05,0.05,0.28,0.98,Steadier inbound curve shaped by ADA shuttle access and lower-mobility movement.
+C,general balancing gate,general fans and season ticket holders,215,moderate,0.3,0.06,0.18,0.82,0.18,Acts as a relief valve when nearby demand shifts away from Gate A or E.
+D,general balancing gate,general fans and season ticket holders,205,moderate,0.32,0.05,0.14,0.78,0.2,General-public gate with moderate reroute absorption during peak surges.
+E,ticketing and will-call gate,general fans with some walk-up ticket handling,170,high friction risk due to ticket handling,0.25,0.3,0.1,0.74,0.16,"Not always the busiest gate, but often more delay-prone because of ticketing friction."
+F,general overflow balancing gate,general overflow and redistributed public demand,225,moderate with relief-gate behavior,0.26,0.04,0.12,0.86,0.14,Useful overflow gate during overload or reroute scenarios from A and E.

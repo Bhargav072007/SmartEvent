@@ -1,0 +1,211 @@
+{
+  "crowd_count": [
+    {
+      "field_name": "frame_id",
+      "type": "string",
+      "description": "Unique identifier for the frame being analyzed.",
+      "example_value": "cam_gate_a_20261018T170500Z_f000231"
+    },
+    {
+      "field_name": "camera_id",
+      "type": "string",
+      "description": "Camera source identifier.",
+      "example_value": "cam_gate_a_01"
+    },
+    {
+      "field_name": "timestamp",
+      "type": "string",
+      "description": "ISO-8601 frame capture timestamp.",
+      "example_value": "2026-10-18T17:05:00Z"
+    },
+    {
+      "field_name": "estimated_count",
+      "type": "integer",
+      "description": "Estimated number of visible people in frame or ROI.",
+      "example_value": 148
+    },
+    {
+      "field_name": "roi_id",
+      "type": "string",
+      "description": "Region-of-interest identifier if count is computed on a sub-area.",
+      "example_value": "gate_queue_lane_1"
+    }
+  ],
+  "density_heatmap": [
+    {
+      "field_name": "frame_id",
+      "type": "string",
+      "description": "Frame identifier used to join with image metadata.",
+      "example_value": "cam_gate_c_20261018T171000Z_f000451"
+    },
+    {
+      "field_name": "heatmap_width",
+      "type": "integer",
+      "description": "Width of the density heatmap grid.",
+      "example_value": 160
+    },
+    {
+      "field_name": "heatmap_height",
+      "type": "integer",
+      "description": "Height of the density heatmap grid.",
+      "example_value": 90
+    },
+    {
+      "field_name": "density_values",
+      "type": "array<float>",
+      "description": "Flattened or nested density values aligned to the heatmap grid.",
+      "example_value": [
+        0.0,
+        0.02,
+        0.11,
+        0.34
+      ]
+    },
+    {
+      "field_name": "integrated_count",
+      "type": "float",
+      "description": "Total count recovered by integrating the heatmap.",
+      "example_value": 152.7
+    }
+  ],
+  "point_localization": [
+    {
+      "field_name": "frame_id",
+      "type": "string",
+      "description": "Frame identifier.",
+      "example_value": "cam_concourse_west_20261018T173000Z_f001212"
+    },
+    {
+      "field_name": "point_id",
+      "type": "string",
+      "description": "Unique identifier for one localized person point.",
+      "example_value": "pt_00031"
+    },
+    {
+      "field_name": "x",
+      "type": "float",
+      "description": "Horizontal pixel coordinate or normalized x-location.",
+      "example_value": 812.4
+    },
+    {
+      "field_name": "y",
+      "type": "float",
+      "description": "Vertical pixel coordinate or normalized y-location.",
+      "example_value": 436.2
+    },
+    {
+      "field_name": "confidence",
+      "type": "float",
+      "description": "Localization confidence score.",
+      "example_value": 0.93
+    }
+  ],
+  "bounding_boxes": [
+    {
+      "field_name": "frame_id",
+      "type": "string",
+      "description": "Frame identifier.",
+      "example_value": "cam_gate_e_20261018T174500Z_f000882"
+    },
+    {
+      "field_name": "box_id",
+      "type": "string",
+      "description": "Unique detection identifier within frame.",
+      "example_value": "det_00117"
+    },
+    {
+      "field_name": "class_name",
+      "type": "string",
+      "description": "Detected object class.",
+      "example_value": "person"
+    },
+    {
+      "field_name": "bbox_xyxy",
+      "type": "array<float>",
+      "description": "Bounding box in [x_min, y_min, x_max, y_max] format.",
+      "example_value": [
+        420.5,
+        168.2,
+        462.8,
+        281.4
+      ]
+    },
+    {
+      "field_name": "confidence",
+      "type": "float",
+      "description": "Detection confidence score.",
+      "example_value": 0.88
+    }
+  ],
+  "optical_flow": [
+    {
+      "field_name": "frame_pair_id",
+      "type": "string",
+      "description": "Identifier for consecutive frames used in motion estimation.",
+      "example_value": "cam_gate_b_pair_20261018T170000Z_170001Z"
+    },
+    {
+      "field_name": "camera_id",
+      "type": "string",
+      "description": "Camera source identifier.",
+      "example_value": "cam_gate_b_02"
+    },
+    {
+      "field_name": "mean_magnitude",
+      "type": "float",
+      "description": "Average optical flow magnitude across ROI.",
+      "example_value": 1.84
+    },
+    {
+      "field_name": "dominant_direction_degrees",
+      "type": "float",
+      "description": "Dominant movement direction in degrees.",
+      "example_value": 273.5
+    },
+    {
+      "field_name": "flow_grid",
+      "type": "array<object>",
+      "description": "Grid of vector samples containing x, y, dx, and dy values.",
+      "example_value": [
+        {
+          "x": 20,
+          "y": 12,
+          "dx": -0.4,
+          "dy": 1.2
+        }
+      ]
+    }
+  ],
+  "super_resolution_validation": [
+    {
+      "field_name": "sample_id",
+      "type": "string",
+      "description": "Unique identifier for paired raw and enhanced sample.",
+      "example_value": "gate_d_sr_eval_0007"
+    },
+    {
+      "field_name": "raw_frame_path",
+      "type": "string",
+      "description": "Path or URI to the original low-resolution image.",
+      "example_value": "frames/raw/gate_d/frame_0007.jpg"
+    },
+    {
+      "field_name": "enhanced_frame_path",
+      "type": "string",
+      "description": "Path or URI to the enhanced image output.",
+      "example_value": "frames/enhanced/gate_d/frame_0007_sr.jpg"
+    },
+    {
+      "field_name": "detector_metric_delta",
+      "type": "float",
+      "description": "Change in downstream detector metric after enhancement.",
+      "example_value": 0.037
+    },
+    {
+      "field_name": "validation_outcome",
+      "type": "string",
+      "description": "Assessment of whether enhancement helps downstream perception.",
+      "example_value": "improved"
+    }
+  ]
+}

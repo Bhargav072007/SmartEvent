@@ -1,0 +1,43 @@
+{
+  "game": {
+    "game_id": "game-psu-michigan-2026",
+    "title": "Penn State vs Michigan",
+    "venue": "Beaver Stadium",
+    "kickoff": "2026-10-17T19:30:00",
+    "gate_hint": "Gate A"
+  },
+  "demo_tickets": [
+    {
+      "ticket_id": "ticket-valid-001",
+      "user_id": "user-001",
+      "token": "PSU-VALID-001",
+      "seat": "Section WE, Row 7, Seat 18",
+      "gate": "Gate A",
+      "status": "active"
+    },
+    {
+      "ticket_id": "ticket-used-001",
+      "user_id": "user-001",
+      "token": "PSU-USED-001",
+      "seat": "Section WA, Row 9, Seat 4",
+      "gate": "Gate C",
+      "status": "used"
+    },
+    {
+      "ticket_id": "ticket-expired-001",
+      "user_id": "user-001",
+      "token": "PSU-EXPIRED-001",
+      "seat": "Section EB, Row 12, Seat 30",
+      "gate": "Gate E",
+      "status": "expired"
+    },
+    {
+      "ticket_id": "ticket-retry-001",
+      "user_id": "user-001",
+      "token": "PSU-RETRY-001",
+      "seat": "Section FC, Row 2, Seat 11",
+      "gate": "Gate B",
+      "status": "retry"
+    }
+  ]
+}

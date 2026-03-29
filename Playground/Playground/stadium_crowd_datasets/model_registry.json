@@ -1,0 +1,432 @@
+[
+  {
+    "paper_id": "crowdvlm_r1_2025",
+    "name": "CrowdVLM-R1",
+    "year": 2025,
+    "category": "crowd counting foundation",
+    "role_in_system": "High-capacity benchmark and transfer-learning source for dense crowd counting.",
+    "upstream_dependencies": [
+      "camera_frames",
+      "curated_annotations"
+    ],
+    "downstream_dependencies": [
+      "forecasting_layer",
+      "benchmark_reports"
+    ],
+    "expected_inputs": [
+      "rgb_frame",
+      "camera_metadata",
+      "optional_crop_region"
+    ],
+    "expected_outputs": [
+      "crowd_count",
+      "scene_embedding"
+    ],
+    "evaluation_metrics": [
+      "MAE",
+      "RMSE",
+      "NAE"
+    ],
+    "assumptions": [
+      "Dense scenes benefit from large pretraining.",
+      "Camera viewpoint is stable enough for transfer learning."
+    ],
+    "failure_modes": [
+      "Domain shift across stadium camera angles.",
+      "Overcounting under extreme occlusion or banners."
+    ],
+    "deployment_constraints": [
+      "GPU preferred",
+      "not ideal for low-latency edge devices"
+    ]
+  },
+  {
+    "paper_id": "hmstunet_2026",
+    "name": "HMSTUNet",
+    "year": 2026,
+    "category": "density estimation",
+    "role_in_system": "Generate spatial heatmaps for occupancy, hotspots, and safety overlays.",
+    "upstream_dependencies": [
+      "camera_frames",
+      "density_supervision"
+    ],
+    "downstream_dependencies": [
+      "fruin_los_1971",
+      "operator_dashboard"
+    ],
+    "expected_inputs": [
+      "rgb_frame",
+      "roi_mask"
+    ],
+    "expected_outputs": [
+      "density_heatmap",
+      "integrated_count"
+    ],
+    "evaluation_metrics": [
+      "MAE",
+      "RMSE",
+      "heatmap_correlation"
+    ],
+    "assumptions": [
+      "Spatial density signal is preserved after perspective normalization.",
+      "Zones of interest are calibrated to camera view."
+    ],
+    "failure_modes": [
+      "Blurred boundaries in overlapping queues.",
+      "Underestimation in severe lighting shifts."
+    ],
+    "deployment_constraints": [
+      "GPU or high-end CPU recommended",
+      "requires calibration for best spatial fidelity"
+    ]
+  },
+  {
+    "paper_id": "pet_iccv_2023",
+    "name": "PET",
+    "year": 2023,
+    "category": "localization",
+    "role_in_system": "Produce point-level person localization for occupancy mapping and weak supervision.",
+    "upstream_dependencies": [
+      "camera_frames",
+      "point_annotations"
+    ],
+    "downstream_dependencies": [
+      "density_estimation_validation",
+      "trajectory_seed_generation"
+    ],
+    "expected_inputs": [
+      "rgb_frame"
+    ],
+    "expected_outputs": [
+      "person_points"
+    ],
+    "evaluation_metrics": [
+      "F1",
+      "precision",
+      "recall",
+      "localization_error"
+    ],
+    "assumptions": [
+      "Point annotations are cheaper and more scalable than full boxes in dense scenes."
+    ],
+    "failure_modes": [
+      "Merged heads in extreme crowd compression.",
+      "Reduced precision for oblique views."
+    ],
+    "deployment_constraints": [
+      "moderate compute",
+      "camera angle consistency improves results"
+    ]
+  },
+  {
+    "paper_id": "ffnet_2024",
+    "name": "FFNet",
+    "year": 2024,
+    "category": "real-time counting",
+    "role_in_system": "Primary live count estimator for edge-side deployment.",
+    "upstream_dependencies": [
+      "camera_frames"
+    ],
+    "downstream_dependencies": [
+      "forecasting_layer",
+      "live_gate_state"
+    ],
+    "expected_inputs": [
+      "rgb_frame",
+      "camera_id"
+    ],
+    "expected_outputs": [
+      "crowd_count",
+      "lightweight_density_signal"
+    ],
+    "evaluation_metrics": [
+      "fps",
+      "MAE",
+      "latency_ms"
+    ],
+    "assumptions": [
+      "Real-time inference matters more than best-possible benchmark score."
+    ],
+    "failure_modes": [
+      "Count drift in extremely dense gates.",
+      "Sensitivity to heavy weather artifacts."
+    ],
+    "deployment_constraints": [
+      "edge GPU preferred",
+      "usable on constrained hardware"
+    ]
+  },
+  {
+    "paper_id": "proactive_crowd_flow_2025",
+    "name": "Proactive Crowd Flow",
+    "year": 2025,
+    "category": "forecasting",
+    "role_in_system": "Predict congestion build-up and identify operational intervention gaps before overload.",
+    "upstream_dependencies": [
+      "historical_gate_arrivals",
+      "live_counts",
+      "event_context"
+    ],
+    "downstream_dependencies": [
+      "gabppo_2024",
+      "operator_alerting"
+    ],
+    "expected_inputs": [
+      "time_series_gate_counts",
+      "kickoff_context",
+      "weather_context"
+    ],
+    "expected_outputs": [
+      "short_horizon_forecast",
+      "aci_gap_flags"
+    ],
+    "evaluation_metrics": [
+      "MAPE",
+      "RMSE",
+      "lead_time_gain"
+    ],
+    "assumptions": [
+      "Arrival patterns are partially predictable from event context and recent demand."
+    ],
+    "failure_modes": [
+      "Sudden policy changes or security incidents break historical priors.",
+      "Forecast lag during abrupt gate closures."
+    ],
+    "deployment_constraints": [
+      "needs historical data store",
+      "benefits from periodic retraining"
+    ]
+  },
+  {
+    "paper_id": "yolov8_2023",
+    "name": "YOLOv8",
+    "year": 2023,
+    "category": "detection",
+    "role_in_system": "Live person detection for sparse-to-moderate density scenes and cross-checking counts.",
+    "upstream_dependencies": [
+      "camera_frames"
+    ],
+    "downstream_dependencies": [
+      "tracking_or_count_crosscheck",
+      "super_resolution_validation"
+    ],
+    "expected_inputs": [
+      "rgb_frame"
+    ],
+    "expected_outputs": [
+      "bounding_boxes",
+      "class_scores"
+    ],
+    "evaluation_metrics": [
+      "mAP",
+      "precision",
+      "recall",
+      "fps"
+    ],
+    "assumptions": [
+      "People remain individually separable in many stadium camera views."
+    ],
+    "failure_modes": [
+      "Box collapse under dense occlusion.",
+      "False positives from flags, signs, or mascots."
+    ],
+    "deployment_constraints": [
+      "excellent real-time support",
+      "requires resolution suited to person scale"
+    ]
+  },
+  {
+    "paper_id": "real_esrgan_2021",
+    "name": "Real-ESRGAN",
+    "year": 2021,
+    "category": "image enhancement",
+    "role_in_system": "Selective enhancement for low-resolution or compressed camera feeds.",
+    "upstream_dependencies": [
+      "raw_camera_frames"
+    ],
+    "downstream_dependencies": [
+      "yolov8_2023",
+      "pet_iccv_2023"
+    ],
+    "expected_inputs": [
+      "low_res_frame"
+    ],
+    "expected_outputs": [
+      "enhanced_frame"
+    ],
+    "evaluation_metrics": [
+      "PSNR",
+      "SSIM",
+      "downstream_mAP_delta"
+    ],
+    "assumptions": [
+      "Enhancement can recover useful detail in degraded footage."
+    ],
+    "failure_modes": [
+      "Hallucinated textures distort detector behavior.",
+      "Latency too high for always-on use."
+    ],
+    "deployment_constraints": [
+      "GPU beneficial",
+      "best used on-demand or for selected cameras"
+    ]
+  },
+  {
+    "paper_id": "b2bdet_2024",
+    "name": "B2BDet",
+    "year": 2024,
+    "category": "enhancement validation",
+    "role_in_system": "Validate whether super-resolution improves or harms detector performance.",
+    "upstream_dependencies": [
+      "raw_frames",
+      "enhanced_frames",
+      "detector_outputs"
+    ],
+    "downstream_dependencies": [
+      "model_selection_policy"
+    ],
+    "expected_inputs": [
+      "paired_raw_and_sr_images",
+      "ground_truth_boxes"
+    ],
+    "expected_outputs": [
+      "validated_detection_delta",
+      "quality_report"
+    ],
+    "evaluation_metrics": [
+      "mAP_delta",
+      "precision_delta",
+      "recall_delta"
+    ],
+    "assumptions": [
+      "Perception quality and detection utility are not always aligned."
+    ],
+    "failure_modes": [
+      "Validation set too narrow to generalize.",
+      "False confidence from visually pleasing but incorrect enhancement."
+    ],
+    "deployment_constraints": [
+      "offline evaluation workflow",
+      "depends on curated validation data"
+    ]
+  },
+  {
+    "paper_id": "farneback_2003",
+    "name": "Farneback Optical Flow",
+    "year": 2003,
+    "category": "motion estimation",
+    "role_in_system": "Estimate directional movement and local speed trends around gates and corridors.",
+    "upstream_dependencies": [
+      "consecutive_frames"
+    ],
+    "downstream_dependencies": [
+      "fruin_los_1971",
+      "forecasting_layer"
+    ],
+    "expected_inputs": [
+      "frame_t",
+      "frame_t_plus_1"
+    ],
+    "expected_outputs": [
+      "flow_vectors",
+      "dominant_direction"
+    ],
+    "evaluation_metrics": [
+      "endpoint_error",
+      "direction_consistency",
+      "runtime_ms"
+    ],
+    "assumptions": [
+      "Short-horizon motion fields are informative for queue propagation."
+    ],
+    "failure_modes": [
+      "Camera shake corrupts flow vectors.",
+      "Rain and reflections add noisy motion."
+    ],
+    "deployment_constraints": [
+      "classical CPU-friendly baseline",
+      "camera stabilization helps"
+    ]
+  },
+  {
+    "paper_id": "fruin_los_1971",
+    "name": "Fruin Level of Service",
+    "year": 1971,
+    "category": "safety scoring",
+    "role_in_system": "Convert density and movement into interpretable operator-facing pressure score.",
+    "upstream_dependencies": [
+      "density_estimates",
+      "motion_estimates",
+      "space_calibration"
+    ],
+    "downstream_dependencies": [
+      "gabppo_2024",
+      "operator_alerting"
+    ],
+    "expected_inputs": [
+      "people_per_m2",
+      "directional_flow",
+      "available_width"
+    ],
+    "expected_outputs": [
+      "pressure_score",
+      "los_class"
+    ],
+    "evaluation_metrics": [
+      "alert_precision",
+      "operator_interpretability"
+    ],
+    "assumptions": [
+      "Physical crowding heuristics remain valuable when fused with modern CV signals."
+    ],
+    "failure_modes": [
+      "Improper calibration of area or width inflates score error.",
+      "Ignores nuanced human behavior beyond density and flow."
+    ],
+    "deployment_constraints": [
+      "requires calibrated geometry",
+      "rules must be tuned to local venue operations"
+    ]
+  },
+  {
+    "paper_id": "gabppo_2024",
+    "name": "GABPPO",
+    "year": 2024,
+    "category": "optimization",
+    "role_in_system": "Choose gate-level routing actions that reduce wait and pressure.",
+    "upstream_dependencies": [
+      "forecasting_layer",
+      "fruin_los_1971",
+      "live_gate_graph"
+    ],
+    "downstream_dependencies": [
+      "route_recommendation_service",
+      "simulation_reports"
+    ],
+    "expected_inputs": [
+      "gate_state_vector",
+      "pressure_scores",
+      "forecast_demand"
+    ],
+    "expected_outputs": [
+      "route_recommendation",
+      "policy_value"
+    ],
+    "evaluation_metrics": [
+      "average_wait_reduction",
+      "clearance_time",
+      "constraint_violations"
+    ],
+    "assumptions": [
+      "Operational actions can be represented as discrete route recommendations."
+    ],
+    "failure_modes": [
+      "Policy overfits to simulated gate graph behavior.",
+      "Recommendations degrade if upstream forecasts are poor."
+    ],
+    "deployment_constraints": [
+      "best paired with simulation and safety constraints",
+      "requires guardrails for operational trust"
+    ]
+  }
+]

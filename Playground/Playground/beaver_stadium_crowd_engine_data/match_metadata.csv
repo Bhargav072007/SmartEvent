@@ -1,0 +1,49 @@
+match_id,season_year,opponent_name,opponent_tier,kickoff_datetime,kickoff_bucket,weekend_flag,premium_game_flag,rivalry_flag,weather_bucket,expected_attendance,expected_attendance_pct_of_capacity,security_strictness,notes
+bsu_2025_001,2025,Akron,lower,2025-08-30T12:00:00,noon,True,True,False,clear,81215,0.7621,elevated,premium demand profile
+bsu_2025_002,2025,Ball State,lower,2025-09-06T15:00:00,afternoon,True,False,False,cool_clear,80851,0.7587,standard,standard game-day profile
+bsu_2025_003,2025,Temple,regional,2025-09-13T19:00:00,night,True,False,False,light_rain,89993,0.8444,standard,night game with sharper late arrivals; weather likely to increase burstiness or friction
+bsu_2025_004,2025,Indiana,conference,2025-09-20T12:00:00,noon,True,False,False,heavy_rain,88486,0.8303,standard,weather likely to increase burstiness or friction
+bsu_2025_005,2025,Illinois,conference,2025-09-27T15:00:00,afternoon,False,False,False,windy,83791,0.7862,standard,weather likely to increase burstiness or friction
+bsu_2025_006,2025,Rutgers,conference,2025-10-04T19:00:00,night,True,False,False,clear,96949,0.9097,standard,night game with sharper late arrivals
+bsu_2025_007,2025,Maryland,conference,2025-10-11T12:00:00,noon,True,False,False,cool_clear,93094,0.8735,standard,standard game-day profile
+bsu_2025_008,2025,Minnesota,conference,2025-10-18T15:00:00,afternoon,True,False,False,light_rain,92587,0.8688,standard,weather likely to increase burstiness or friction
+bsu_2025_009,2025,Michigan State,conference,2025-10-25T19:00:00,night,True,False,False,heavy_rain,91987,0.8631,standard,night game with sharper late arrivals; weather likely to increase burstiness or friction
+bsu_2025_010,2025,Iowa,upper,2025-11-01T12:00:00,noon,True,True,False,windy,101844,0.9556,elevated,premium demand profile; weather likely to increase burstiness or friction
+bsu_2025_011,2025,Michigan,elite,2025-11-08T15:00:00,afternoon,False,True,True,clear,106335,0.9978,tight,premium demand profile; rivalry-style late arrival pressure
+bsu_2025_012,2025,Ohio State,elite,2025-11-15T19:00:00,night,True,True,True,cool_clear,106572,1.0,tight,premium demand profile; rivalry-style late arrival pressure; night game with sharper late arrivals
+bsu_2026_013,2026,Akron,lower,2026-11-22T12:00:00,noon,True,False,False,light_rain,74275,0.6969,standard,weather likely to increase burstiness or friction
+bsu_2026_014,2026,Ball State,lower,2026-11-29T15:00:00,afternoon,True,False,False,heavy_rain,74808,0.7019,standard,weather likely to increase burstiness or friction
+bsu_2026_015,2026,Temple,regional,2026-12-06T19:00:00,night,True,False,False,windy,88986,0.835,standard,night game with sharper late arrivals; weather likely to increase burstiness or friction
+bsu_2026_016,2026,Indiana,conference,2026-12-13T12:00:00,noon,True,False,False,clear,91925,0.8626,standard,standard game-day profile
+bsu_2026_017,2026,Illinois,conference,2026-12-20T15:00:00,afternoon,False,False,False,cool_clear,88187,0.8275,standard,standard game-day profile
+bsu_2026_018,2026,Rutgers,conference,2026-12-27T19:00:00,night,True,False,False,light_rain,97042,0.9106,standard,night game with sharper late arrivals; weather likely to increase burstiness or friction
+bsu_2026_019,2026,Maryland,conference,2026-01-03T12:00:00,noon,True,True,False,heavy_rain,91814,0.8615,elevated,premium demand profile; weather likely to increase burstiness or friction
+bsu_2026_020,2026,Minnesota,conference,2026-01-10T15:00:00,afternoon,True,False,False,windy,92384,0.8669,standard,weather likely to increase burstiness or friction
+bsu_2026_021,2026,Michigan State,conference,2026-01-17T19:00:00,night,True,False,False,clear,95843,0.8993,standard,night game with sharper late arrivals
+bsu_2026_022,2026,Iowa,upper,2026-01-24T12:00:00,noon,True,False,False,cool_clear,100950,0.9472,standard,standard game-day profile
+bsu_2026_023,2026,Michigan,elite,2026-01-31T15:00:00,afternoon,False,True,True,light_rain,104472,0.9803,tight,premium demand profile; rivalry-style late arrival pressure; weather likely to increase burstiness or friction
+bsu_2026_024,2026,Ohio State,elite,2026-02-07T19:00:00,night,True,True,True,heavy_rain,106572,1.0,tight,premium demand profile; rivalry-style late arrival pressure; night game with sharper late arrivals; weather likely to increase burstiness or friction
+bsu_2027_025,2027,Akron,lower,2027-02-14T12:00:00,noon,True,False,False,windy,76894,0.7215,standard,weather likely to increase burstiness or friction
+bsu_2027_026,2027,Ball State,lower,2027-02-21T15:00:00,afternoon,True,False,False,clear,81274,0.7626,standard,standard game-day profile
+bsu_2027_027,2027,Temple,regional,2027-02-28T19:00:00,night,True,False,False,cool_clear,90495,0.8491,standard,night game with sharper late arrivals
+bsu_2027_028,2027,Indiana,conference,2027-03-07T12:00:00,noon,True,True,False,light_rain,97101,0.9111,elevated,premium demand profile; weather likely to increase burstiness or friction
+bsu_2027_029,2027,Illinois,conference,2027-03-14T15:00:00,afternoon,False,False,False,heavy_rain,81935,0.7688,standard,weather likely to increase burstiness or friction
+bsu_2027_030,2027,Rutgers,conference,2027-03-21T19:00:00,night,True,False,False,windy,95657,0.8976,standard,night game with sharper late arrivals; weather likely to increase burstiness or friction
+bsu_2027_031,2027,Maryland,conference,2027-03-28T12:00:00,noon,True,False,False,clear,94012,0.8821,standard,standard game-day profile
+bsu_2027_032,2027,Minnesota,conference,2027-04-04T15:00:00,afternoon,True,False,False,cool_clear,95109,0.8924,standard,standard game-day profile
+bsu_2027_033,2027,Michigan State,conference,2027-04-11T19:00:00,night,True,False,False,light_rain,96945,0.9097,standard,night game with sharper late arrivals; weather likely to increase burstiness or friction
+bsu_2027_034,2027,Iowa,upper,2027-04-18T12:00:00,noon,True,False,False,heavy_rain,96974,0.9099,standard,weather likely to increase burstiness or friction
+bsu_2027_035,2027,Michigan,elite,2027-04-25T15:00:00,afternoon,False,True,True,windy,101587,0.9532,tight,premium demand profile; rivalry-style late arrival pressure; weather likely to increase burstiness or friction
+bsu_2027_036,2027,Ohio State,elite,2027-05-02T19:00:00,night,True,True,True,clear,106572,1.0,tight,premium demand profile; rivalry-style late arrival pressure; night game with sharper late arrivals
+bsu_2028_037,2028,Akron,lower,2028-05-09T12:00:00,noon,True,True,False,cool_clear,82197,0.7713,elevated,premium demand profile
+bsu_2028_038,2028,Ball State,lower,2028-05-16T15:00:00,afternoon,True,False,False,light_rain,78873,0.7401,standard,weather likely to increase burstiness or friction
+bsu_2028_039,2028,Temple,regional,2028-05-23T19:00:00,night,True,False,False,heavy_rain,86693,0.8135,standard,night game with sharper late arrivals; weather likely to increase burstiness or friction
+bsu_2028_040,2028,Indiana,conference,2028-05-30T12:00:00,noon,True,False,False,windy,90298,0.8473,standard,weather likely to increase burstiness or friction
+bsu_2028_041,2028,Illinois,conference,2028-06-06T15:00:00,afternoon,False,False,False,clear,88293,0.8285,standard,standard game-day profile
+bsu_2028_042,2028,Rutgers,conference,2028-06-13T19:00:00,night,True,False,False,cool_clear,98007,0.9196,standard,night game with sharper late arrivals
+bsu_2028_043,2028,Maryland,conference,2028-06-20T12:00:00,noon,True,False,False,light_rain,93037,0.873,standard,weather likely to increase burstiness or friction
+bsu_2028_044,2028,Minnesota,conference,2028-06-27T15:00:00,afternoon,True,False,False,heavy_rain,92023,0.8635,standard,weather likely to increase burstiness or friction
+bsu_2028_045,2028,Michigan State,conference,2028-07-04T19:00:00,night,True,False,False,windy,97065,0.9108,standard,night game with sharper late arrivals; weather likely to increase burstiness or friction
+bsu_2028_046,2028,Iowa,upper,2028-07-11T12:00:00,noon,True,True,False,clear,106572,1.0,elevated,premium demand profile
+bsu_2028_047,2028,Michigan,elite,2028-07-18T15:00:00,afternoon,False,True,True,cool_clear,105063,0.9858,tight,premium demand profile; rivalry-style late arrival pressure
+bsu_2028_048,2028,Ohio State,elite,2028-07-25T19:00:00,night,True,True,True,light_rain,106572,1.0,tight,premium demand profile; rivalry-style late arrival pressure; night game with sharper late arrivals; weather likely to increase burstiness or friction

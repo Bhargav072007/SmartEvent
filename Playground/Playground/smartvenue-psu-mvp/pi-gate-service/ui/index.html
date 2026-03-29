@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartVenue PSU Gate Screen</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="backdrop-grid"></div>
+
+  <main class="screen">
+    <header class="topbar">
+      <div class="brand-cluster">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 120 120" role="img">
+            <defs>
+              <linearGradient id="beam" x1="12" y1="18" x2="100" y2="100">
+                <stop offset="0%" stop-color="#92d8ff"></stop>
+                <stop offset="100%" stop-color="#2f77ff"></stop>
+              </linearGradient>
+            </defs>
+            <rect x="10" y="10" width="100" height="100" rx="28" fill="#02142c"></rect>
+            <path d="M28 76C28 58.327 42.327 44 60 44H92C92 61.673 77.673 76 60 76H28Z" fill="url(#beam)"></path>
+            <path d="M33 84H68C80.703 84 91 94.297 91 107H56C43.297 107 33 96.703 33 84Z" fill="#f7fbff"></path>
+            <path d="M44 48C44 35.85 53.85 26 66 26C78.15 26 88 35.85 88 48V54H44V48Z" fill="none" stroke="#f7fbff" stroke-width="7"></path>
+          </svg>
+        </div>
+        <div>
+          <p class="eyebrow">SmartVenue PSU</p>
+          <h1 id="gateName">Gate A</h1>
+          <p class="subline">Beaver Stadium Entry Console</p>
+        </div>
+      </div>
+
+      <div class="status-cluster">
+        <div class="game-pill">Penn State vs Michigan</div>
+        <div class="status-chip" id="statusChip">READY</div>
+      </div>
+    </header>
+
+    <section class="hero hero-ready" id="heroPanel">
+      <div class="hero-copy">
+        <p class="eyebrow">Live Gate State</p>
+        <h2 id="displayText">Ready to Tap</h2>
+        <p id="messageText">Hold phone or NFC token near the reader.</p>
+
+        <div class="hero-tags">
+          <span class="tag">NFC Ready</span>
+          <span class="tag">Pi Connected</span>
+          <span class="tag">SenseCAP View</span>
+        </div>
+      </div>
+
+      <div class="hero-signal">
+        <div class="signal-core" id="signalCore">
+          <span class="signal-word" id="signalWord">READY</span>
+        </div>
+        <div class="signal-rings" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-grid">
+      <article class="panel primary-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Scan Snapshot</p>
+            <h3>Gate telemetry</h3>
+          </div>
+          <div class="mini-indicator" id="miniIndicator"></div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span>Device</span>
+            <strong id="deviceId">pi-gate-a-01</strong>
+          </div>
+          <div class="stat-card">
+            <span>Last Scan</span>
+            <strong id="lastScan">Waiting</strong>
+          </div>
+          <div class="stat-card">
+            <span>Last Token</span>
+            <strong id="lastToken">None</strong>
+          </div>
+          <div class="stat-card">
+            <span>Scan Count</span>
+            <strong id="scanCount">0</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel secondary-panel">
+        <p class="eyebrow">Operator Notes</p>
+        <h3>Demo-ready entry states</h3>
+
+        <div class="legend">
+          <span class="pill success">VERIFIED</span>
+          <span class="pill warning">RETRY</span>
+          <span class="pill caution">EXPIRED</span>
+          <span class="pill danger">INVALID</span>
+        </div>
+
+        <div class="action-list">
+          <div class="action-row">
+            <span class="action-token">PSU-VALID-001</span>
+            <span class="action-note">Green admit</span>
+          </div>
+          <div class="action-row">
+            <span class="action-token">PSU-USED-001</span>
+            <span class="action-note">Already used</span>
+          </div>
+          <div class="action-row">
+            <span class="action-token">PSU-EXPIRED-001</span>
+            <span class="action-note">Expired window</span>
+          </div>
+          <div class="action-row">
+            <span class="action-token">PSU-RETRY-001</span>
+            <span class="action-note">Unreadable tap</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer-panel">
+      <div class="footer-copy">
+        <strong>Game-day tap-and-go</strong>
+        <span>Built for Raspberry Pi 4 + NFC reader + SenseCAP Indicator D1</span>
+      </div>
+      <div class="footer-badge">SmartVenue PSU MVP</div>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
