@@ -1,0 +1,37 @@
+{
+  "name": "ParkingLot",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "capacity": {
+      "type": "number"
+    },
+    "current_occupancy": {
+      "type": "number",
+      "default": 0
+    },
+    "nearest_gate": {
+      "type": "string",
+      "description": "Nearest gate code"
+    },
+    "walk_minutes": {
+      "type": "number",
+      "description": "Walk time to nearest gate in minutes"
+    },
+    "position_x": {
+      "type": "number"
+    },
+    "position_y": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "name",
+    "code"
+  ]
+}
