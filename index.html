@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartVenue PSU MVP</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient--one"></div>
+  <div class="ambient ambient--two"></div>
+
+  <div class="app-shell">
+    <header class="masthead">
+      <div class="brand-shell">
+        <div class="brand-mark">
+          <img src="logo.svg" alt="SmartVenue logo">
+        </div>
+        <div>
+          <p class="eyebrow">SmartVenue PSU / Beaver Stadium MVP</p>
+          <h1>Ticket-driven venue intelligence for Penn State game day.</h1>
+        </div>
+      </div>
+      <div class="progress-tracker" id="progress-tracker" aria-label="Setup progress">
+        <div class="progress-step is-active" data-step="signup">
+          <span>1</span>
+          <small>Sign Up</small>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step" data-step="scan">
+          <span>2</span>
+          <small>Scan Ticket</small>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step" data-step="experience">
+          <span>3</span>
+          <small>Live Event</small>
+        </div>
+      </div>
+    </header>
+
+    <main class="stage">
+      <section class="view is-active" id="signup-view" aria-labelledby="signup-title">
+        <div class="view-grid view-grid--signup">
+          <div class="story-panel">
+            <div class="story-card">
+              <div class="hero-brand">
+                <span class="brand-token">SmartVenue PSU</span>
+                <span class="brand-subtoken">Crowd intelligence / routing / vision</span>
+              </div>
+              <p class="mini-label">Penn State football crowd flow</p>
+              <h2 id="signup-title">Start with the fan profile, then let the ticket unlock the event.</h2>
+              <p class="lead">
+                SmartVenue PSU is designed to reduce crowding at Beaver Stadium by combining live gate camera
+                data, queue forecasting, and personalized routing. This MVP starts exactly where fans do:
+                sign up, scan the event ticket, and get live guidance.
+              </p>
+
+              <div class="feature-ribbon">
+                <article>
+                  <strong>Queue Density</strong>
+                  <p>Camera-backed gate load, live wait time, and hot-zone alerts.</p>
+                </article>
+                <article>
+                  <strong>Fastest Gate</strong>
+                  <p>Routing engine recommends the best gate for your section in real time.</p>
+                </article>
+                <article>
+                  <strong>Smart Entry</strong>
+                  <p>Vision-assisted verification speeds up smart lanes and rebalances traffic.</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="snapshot-card">
+              <div class="snapshot-header">
+                <span class="dot"></span>
+                <p>Beaver Stadium MVP focus</p>
+              </div>
+              <ul class="snapshot-list">
+                <li>Personalized gate recommendation after ticket scan</li>
+                <li>Live venue density map for gates, concourses, and student areas</li>
+                <li>Push-style alerts for reroutes, concessions, and exits</li>
+                <li>Operator view for gate verification, throughput, and interventions</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="form-panel">
+            <div class="panel-frame">
+              <p class="mini-label">Fan Sign Up</p>
+              <h3>Create your SmartVenue profile</h3>
+              <form id="signup-form" class="stack">
+                <label class="field">
+                  <span>Full name</span>
+                  <input id="full-name" name="fullName" type="text" placeholder="Alex Morgan" required>
+                </label>
+
+                <label class="field">
+                  <span>Email address</span>
+                  <input id="email" name="email" type="email" placeholder="alex@psu.edu" required>
+                </label>
+
+                <label class="field">
+                  <span>Arrival priority</span>
+                  <select id="arrival-priority" name="arrivalPriority">
+                    <option value="fastest">Get me through the fastest gate</option>
+                    <option value="shortest">Keep the walking route short</option>
+                    <option value="smart">Prioritize the smart entry lane</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span>Access preference</span>
+                  <select id="access-preference" name="accessPreference">
+                    <option value="standard">Standard route</option>
+                    <option value="step-free">Step-free route if available</option>
+                    <option value="space">Wider route with lower density</option>
+                  </select>
+                </label>
+
+                <button class="primary-button" type="submit">Continue to ticket scan</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="ticket-view" aria-labelledby="ticket-title">
+        <div class="ticket-app-shell">
+          <section class="stadium-hero-card">
+            <div class="app-badge">
+              <div class="app-badge-mark">
+                <img src="logo.svg" alt="SmartVenue logo">
+              </div>
+              <div>
+                <strong>SmartVenue PSU</strong>
+                <span>Penn State venue intelligence</span>
+              </div>
+            </div>
+
+            <div class="stadium-photo-card">
+              <div class="stadium-photo-copy">
+                <p class="mini-label">Beaver Stadium</p>
+                <h3>Penn State Nittany Lions Game Day</h3>
+                <p>State College, PA &bull; Capacity 106,572</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="ticket-confirm-card">
+            <div class="confirmation-mark">&#10003;</div>
+            <h3>Ticket Found!</h3>
+            <p>Confirm your details below</p>
+          </section>
+
+          <div class="view-grid view-grid--ticket">
+          <div class="scanner-panel">
+            <div class="panel-frame panel-frame--scanner">
+              <div class="scanner-head">
+                <div>
+                  <p class="mini-label">Ticket Scan</p>
+                  <h2 id="ticket-title">Scan your event ticket</h2>
+                </div>
+                <span class="status-pill">Beaver Stadium ready</span>
+              </div>
+
+              <div class="scanner-stage" id="scanner-stage">
+                <div class="scanner-line"></div>
+                <div class="scanner-glow"></div>
+                <div class="ticket-ghost">
+                  <small>EVENT TICKET</small>
+                  <strong>Penn State Football MVP Demo</strong>
+                  <p>Live routing starts the moment this ticket is recognized.</p>
+                </div>
+              </div>
+
+              <div class="scanner-actions">
+                <label class="file-field">
+                  <span>Optional ticket upload</span>
+                  <input id="ticket-upload" type="file" accept="image/*,.pdf">
+                </label>
+
+                <label class="field">
+                  <span>Or enter a ticket code</span>
+                  <input id="ticket-code" type="text" placeholder="PSU-BVR-WE07-1842">
+                </label>
+
+                <button class="primary-button" id="scan-ticket-button" type="button">Scan ticket and open event</button>
+                <p class="scan-status" id="scan-status" aria-live="polite">
+                  Choose a demo ticket or enter a code to load the Beaver Stadium experience.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket-panel">
+            <div class="panel-frame">
+              <div class="ticket-choice-head">
+                <div>
+                  <p class="mini-label">Demo Tickets</p>
+                  <h3>Pick a Penn State fan profile</h3>
+                </div>
+                <button class="ghost-button" id="back-to-signup" type="button">Back</button>
+              </div>
+
+              <div class="ticket-choice-list" id="ticket-choice-list"></div>
+
+              <div class="recognized-ticket" id="recognized-ticket">
+                <p class="mini-label">Ticket preview</p>
+                <h4 id="preview-ticket-title">West Lower Bowl</h4>
+                <div class="ticket-meta" id="preview-ticket-meta"></div>
+                <p class="ticket-note" id="preview-ticket-note"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <section class="view" id="experience-view" aria-labelledby="experience-title">
+        <div class="experience-topbar">
+          <div class="experience-head">
+            <div class="experience-brandmark">
+              <img src="logo.svg" alt="SmartVenue logo">
+            </div>
+            <div>
+              <p class="mini-label">Live Event Intelligence</p>
+              <h2 id="experience-title">Penn State Football MVP Demo at Beaver Stadium</h2>
+              <p class="lead compact" id="hero-copy"></p>
+            </div>
+          </div>
+
+          <div class="control-stack">
+            <div class="mode-toggle" id="mode-toggle">
+              <button type="button" class="toggle-chip is-selected" data-mode="fan">Fan View</button>
+              <button type="button" class="toggle-chip" data-mode="ops">Operator View</button>
+            </div>
+
+            <div class="scenario-strip" id="scenario-strip"></div>
+
+            <div class="action-row">
+              <button class="ghost-button" id="refresh-feed" type="button">Refresh live feed</button>
+              <button class="ghost-button" id="restart-demo" type="button">Restart demo</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="summary-band" id="summary-band" aria-label="Live summary metrics"></section>
+
+        <div class="dashboard-grid">
+          <article class="surface-card route-surface">
+            <div class="card-header">
+              <div>
+                <p class="mini-label">Routing Engine</p>
+                <h3>Best move right now</h3>
+              </div>
+              <span class="status-pill" id="route-badge">Live recommendation</span>
+            </div>
+            <div id="route-panel"></div>
+          </article>
+
+          <article class="surface-card gate-surface">
+            <div class="card-header">
+              <div>
+                <p class="mini-label">Crowd Engine</p>
+                <h3>Fastest gates and queue density</h3>
+              </div>
+              <span class="subtle-meta" id="camera-sync"></span>
+            </div>
+            <div class="gate-grid" id="gate-grid"></div>
+          </article>
+
+          <article class="surface-card map-surface">
+            <div class="card-header">
+              <div>
+                <p class="mini-label">Venue Heat</p>
+                <h3>Beaver Stadium live map</h3>
+              </div>
+              <span class="subtle-meta">Camera-backed zones</span>
+            </div>
+            <div class="stadium-map" id="stadium-map"></div>
+          </article>
+
+          <article class="surface-card camera-surface" id="camera-surface">
+            <div class="card-header">
+              <div>
+                <p class="mini-label">Vision Engine</p>
+                <h3>Camera and smart gate signals</h3>
+              </div>
+              <span class="subtle-meta">Demo confidence feed</span>
+            </div>
+            <div class="camera-grid" id="camera-grid"></div>
+          </article>
+
+          <article class="surface-card alerts-surface">
+            <div class="card-header">
+              <div>
+                <p class="mini-label">Push Alerts</p>
+                <h3>Fan notifications</h3>
+              </div>
+              <span class="subtle-meta">Reroutes and tips</span>
+            </div>
+            <div class="alert-list" id="alert-list" aria-live="polite"></div>
+          </article>
+
+          <article class="surface-card metrics-surface" id="metrics-surface">
+            <div class="card-header">
+              <div>
+                <p class="mini-label">Impact Snapshot</p>
+                <h3>Baseline vs SmartVenue</h3>
+              </div>
+              <span class="subtle-meta">Hackathon MVP comparison</span>
+            </div>
+            <div id="impact-panel"></div>
+          </article>
+
+          <article class="surface-card ops-surface" id="ops-surface">
+            <div class="card-header">
+              <div>
+                <p class="mini-label">Operator Controls</p>
+                <h3>Interventions and throughput</h3>
+              </div>
+              <span class="subtle-meta">Used in ops view</span>
+            </div>
+            <div id="ops-panel"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

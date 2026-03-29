@@ -1,0 +1,36 @@
+{
+  "name": "Notification",
+  "type": "object",
+  "properties": {
+    "fan_email": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "gate_change",
+        "route_update",
+        "congestion_alert",
+        "general"
+      ],
+      "default": "general"
+    },
+    "read": {
+      "type": "boolean",
+      "default": false
+    },
+    "gate_code": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "message"
+  ]
+}

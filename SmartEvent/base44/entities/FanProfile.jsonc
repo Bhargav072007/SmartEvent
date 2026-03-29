@@ -1,0 +1,43 @@
+{
+  "name": "FanProfile",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "selfie_url": {
+      "type": "string",
+      "description": "Uploaded selfie for face gate pass"
+    },
+    "ticket_section": {
+      "type": "string"
+    },
+    "assigned_gate": {
+      "type": "string",
+      "description": "Recommended gate code"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "verified",
+        "retry",
+        "manual_check"
+      ],
+      "default": "pending"
+    },
+    "parking_lot": {
+      "type": "string"
+    },
+    "checked_in": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "Gate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Gate name (e.g. Gate A)"
+    },
+    "code": {
+      "type": "string",
+      "description": "Short code like A, B, C"
+    },
+    "capacity": {
+      "type": "number",
+      "description": "Max throughput per hour"
+    },
+    "current_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Current people in queue/processing"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "busy",
+        "congested",
+        "closed"
+      ],
+      "default": "open"
+    },
+    "wait_minutes": {
+      "type": "number",
+      "default": 0
+    },
+    "description": {
+      "type": "string",
+      "description": "e.g. Student entrance, ADA access"
+    },
+    "position_x": {
+      "type": "number",
+      "description": "X position on map (0-100)"
+    },
+    "position_y": {
+      "type": "number",
+      "description": "Y position on map (0-100)"
+    },
+    "nearest_parking": {
+      "type": "string",
+      "description": "Nearest parking lot name"
+    }
+  },
+  "required": [
+    "name",
+    "code"
+  ]
+}
